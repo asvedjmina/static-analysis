@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Лабораторная работа № 1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="lab01_quarto_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lab01_quarto_files/libs/quarto-html/quarto.js"></script>
+<script src="lab01_quarto_files/libs/quarto-html/popper.min.js"></script>
+<script src="lab01_quarto_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="lab01_quarto_files/libs/quarto-html/anchor.min.js"></script>
+<link href="lab01_quarto_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lab01_quarto_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="lab01_quarto_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="lab01_quarto_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="lab01_quarto_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Лабораторная работа № 1</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="лабораторная-работа-1" class="level1">
+<h1>Лабораторная работа № 1</h1>
+<p><strong>Тема:</strong> Julia. Установка и настройка. Основные принципы.</p>
+<p><strong>Цель:</strong> подготовить рабочее пространство и инструментарий для Julia, познакомиться с основами синтаксиса языка и выполнить примеры работы с вводом-выводом, преобразованием типов, векторами и матрицами.</p>
+<div id="3aac56e1" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DrWatson</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">@quickactivate</span> <span class="st">"project"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>GR строит графики без открытия окна, что позволяет одинаково запускать лабораторную из терминала, Jupyter и при автоматической генерации документа.</p>
+<div id="7c17bb65" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cn">ENV</span>[<span class="st">"GKSwstype"</span>] <span class="op">=</span> <span class="st">"100"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">BenchmarkTools</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CSV</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DataFrames</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Dates</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DelimitedFiles</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">DifferentialEquations</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">JLD2</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">LinearAlgebra</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Plots</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">include</span>(<span class="fu">srcdir</span>(<span class="st">"lab01.jl"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>calculate_for_parameter</code></pre>
+</div>
+</div>
+<section id="проверка-рабочего-окружения" class="level2">
+<h2 class="anchored" data-anchor-id="проверка-рабочего-окружения">Проверка рабочего окружения</h2>
+<div id="ef799ce7" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Версия Julia: "</span>, <span class="cn">VERSION</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Дата выполнения: "</span>, <span class="fu">today</span>())</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Активный проект: "</span>, <span class="bu">Base</span>.<span class="fu">active_project</span>())</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Корень проекта: "</span>, <span class="fu">projectdir</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Версия Julia: 1.12.5
+Дата выполнения: 2026-09-08
+Активный проект: /home/asvedjmina/university/static_analys/labs/lab01/project/Project.toml
+Корень проекта: /home/asvedjmina/university/static_analys/labs/lab01/project</code></pre>
+</div>
+</div>
+</section>
+<section id="типы-числовых-величин" class="level2">
+<h2 class="anchored" data-anchor-id="типы-числовых-величин">Типы числовых величин</h2>
+<p>Функция <code>typeof</code> возвращает конкретный тип значения.</p>
+<div id="3d288f26" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> (<span class="fl">3</span>, <span class="fl">3.5</span>, <span class="fl">3</span> <span class="op">/</span> <span class="fl">3.5</span>, <span class="fl">3</span> <span class="op">+</span> <span class="fl">4im</span>, <span class="cn">pi</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> value <span class="kw">in</span> values</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(<span class="fu">repr</span>(value), <span class="st">" имеет тип "</span>, <span class="fu">typeof</span>(value))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3 имеет тип Int64
+3.5 имеет тип Float64
+0.8571428571428571 имеет тип Float64
+3 + 4im имеет тип Complex{Int64}
+π имеет тип Irrational{:π}</code></pre>
+</div>
+</div>
+<p>Вещественные числа поддерживают специальные значения бесконечности и неопределённости.</p>
+<div id="2fd036cd" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>special_values <span class="op">=</span> (<span class="cn">Inf</span>, <span class="op">-</span><span class="cn">Inf</span>, <span class="cn">NaN</span>, <span class="fl">1.0</span> <span class="op">/</span> <span class="fl">0.0</span>, <span class="fl">0.0</span> <span class="op">/</span> <span class="fl">0.0</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> value <span class="kw">in</span> special_values</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(<span class="fu">repr</span>(value), <span class="st">" имеет тип "</span>, <span class="fu">typeof</span>(value))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Inf имеет тип Float64
+-Inf имеет тип Float64
+NaN имеет тип Float64
+Inf имеет тип Float64
+NaN имеет тип Float64</code></pre>
+</div>
+</div>
+</section>
+<section id="границы-целочисленных-типов" class="level2">
+<h2 class="anchored" data-anchor-id="границы-целочисленных-типов">Границы целочисленных типов</h2>
+<div id="b57bd07b" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>integer_types <span class="op">=</span> [</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Int8</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Int16</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Int32</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Int64</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Int128</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">UInt8</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">UInt16</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">UInt32</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">UInt64</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">UInt128</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> T <span class="kw">in</span> integer_types</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(<span class="fu">lpad</span>(<span class="fu">string</span>(T), <span class="fl">7</span>), <span class="st">": ["</span>, <span class="fu">typemin</span>(T), <span class="st">", "</span>, <span class="fu">typemax</span>(T), <span class="st">"]"</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Int8: [-128, 127]
+  Int16: [-32768, 32767]
+  Int32: [-2147483648, 2147483647]
+  Int64: [-9223372036854775808, 9223372036854775807]
+ Int128: [-170141183460469231731687303715884105728, 170141183460469231731687303715884105727]
+  UInt8: [0, 255]
+ UInt16: [0, 65535]
+ UInt32: [0, 4294967295]
+ UInt64: [0, 18446744073709551615]
+UInt128: [0, 340282366920938463463374607431768211455]</code></pre>
+</div>
+</div>
+</section>
+<section id="преобразование-и-продвижение-типов" class="level2">
+<h2 class="anchored" data-anchor-id="преобразование-и-продвижение-типов">Преобразование и продвижение типов</h2>
+<div id="e9473d62" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>direct_conversion <span class="op">=</span> (<span class="fu">Int64</span>(<span class="fl">2.0</span>), <span class="fu">Char</span>(<span class="fl">65</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>generic_conversion <span class="op">=</span> (<span class="fu">convert</span>(<span class="dt">Int64</span>, <span class="fl">2.0</span>), <span class="fu">convert</span>(<span class="dt">Char</span>, <span class="fl">65</span>))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>boolean_conversion <span class="op">=</span> (<span class="fu">Bool</span>(<span class="fl">1</span>), <span class="fu">Bool</span>(<span class="fl">0</span>))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>promoted <span class="op">=</span> <span class="fu">promote</span>(<span class="fu">Int8</span>(<span class="fl">1</span>), <span class="fu">Float16</span>(<span class="fl">4.5</span>), <span class="fu">Float32</span>(<span class="fl">4.1</span>))</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Прямое преобразование: "</span>, direct_conversion)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Преобразование convert: "</span>, generic_conversion)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Преобразование Bool: "</span>, boolean_conversion)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Результат promote: "</span>, promoted)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Типы после promote: "</span>, <span class="fu">typeof</span>.(promoted))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Прямое преобразование: (2, 'A')
+Преобразование convert: (2, 'A')
+Преобразование Bool: (true, false)
+Результат promote: (1.0f0, 4.5f0, 4.1f0)
+Типы после promote: (Float32, Float32, Float32)</code></pre>
+</div>
+</div>
+</section>
+<section id="определение-функций" class="level2">
+<h2 class="anchored" data-anchor-id="определение-функций">Определение функций</h2>
+<div id="8fe4fb48" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">square</span>(x)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">^</span><span class="fl">2</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cube</span>(x) <span class="op">=</span> x<span class="op">^</span><span class="fl">3</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"square(4) = "</span>, <span class="fu">square</span>(<span class="fl">4</span>))</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"cube(3) = "</span>, <span class="fu">cube</span>(<span class="fl">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>square(4) = 16
+cube(3) = 27</code></pre>
+</div>
+</div>
+</section>
+<section id="одномерные-и-двумерные-массивы" class="level2">
+<h2 class="anchored" data-anchor-id="одномерные-и-двумерные-массивы">Одномерные и двумерные массивы</h2>
+<div id="af87a534" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>row_vector <span class="op">=</span> [<span class="fl">4</span> <span class="fl">7</span> <span class="fl">6</span>]</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>column_vector <span class="op">=</span> [<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>]</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Вектор-строка: "</span>, row_vector)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Вектор-столбец: "</span>, column_vector)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Вторые элементы: "</span>, row_vector[<span class="fl">2</span>], <span class="st">", "</span>, column_vector[<span class="fl">2</span>])</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>a, b, c, d <span class="op">=</span> <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>Am <span class="op">=</span> [a b; c d]</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Матрица Am:"</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(Am)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Элементы Am: "</span>, (Am[<span class="fl">1</span>, <span class="fl">1</span>], Am[<span class="fl">1</span>, <span class="fl">2</span>], Am[<span class="fl">2</span>, <span class="fl">1</span>], Am[<span class="fl">2</span>, <span class="fl">2</span>]))</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>aa <span class="op">=</span> [<span class="fl">1</span> <span class="fl">2</span>]</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>AA <span class="op">=</span> [<span class="fl">1</span> <span class="fl">2</span>; <span class="fl">3</span> <span class="fl">4</span>]</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"aa * AA * aa' = "</span>, aa <span class="op">*</span> AA <span class="op">*</span> aa<span class="op">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Вектор-строка: [4 7 6]
+Вектор-столбец: [1, 2, 3]
+Вторые элементы: 7, 2
+Матрица Am:
+Элементы Am: (1, 2, 3, 4)
+aa * AA * aa' = [27;;]</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>2×2 Matrix{Int64}:
+ 1  2
+ 3  4</code></pre>
+</div>
+</div>
+</section>
+<section id="самостоятельная-работа-чтение-запись-и-вывод" class="level2">
+<h2 class="anchored" data-anchor-id="самостоятельная-работа-чтение-запись-и-вывод">Самостоятельная работа: чтение, запись и вывод</h2>
+<p><code>print</code> не добавляет перевод строки, <code>println</code> добавляет, а <code>show</code> выводит представление объекта, близкое к синтаксису Julia.</p>
+<div id="b81ffca7" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Вывод print; "</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"вывод println"</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">show</span>(<span class="cn">stdout</span>, <span class="st">"строка через show"</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>()</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkpath</span>(<span class="fu">datadir</span>(<span class="st">"exp_pro"</span>))</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>text_file <span class="op">=</span> <span class="fu">datadir</span>(<span class="st">"exp_pro"</span>, <span class="st">"example.txt"</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>binary_file <span class="op">=</span> <span class="fu">datadir</span>(<span class="st">"exp_pro"</span>, <span class="st">"bytes.bin"</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>table_file <span class="op">=</span> <span class="fu">datadir</span>(<span class="st">"exp_pro"</span>, <span class="st">"table.csv"</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="fu">open</span>(text_file, <span class="st">"w"</span>) <span class="cf">do</span> io</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(io, <span class="st">"первая строка"</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(io, <span class="st">"вторая строка"</span>)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(io, <span class="st">"третья строка"</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>whole_text <span class="op">=</span> <span class="fu">read</span>(text_file, <span class="dt">String</span>)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Результат read(..., String):"</span>)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(whole_text)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="fu">open</span>(text_file, <span class="st">"r"</span>) <span class="cf">do</span> io</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(<span class="st">"Результат readline: "</span>, <span class="fu">readline</span>(io))</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>all_lines <span class="op">=</span> <span class="fu">readlines</span>(text_file)</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Результат readlines: "</span>, all_lines)</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>bytes_written <span class="op">=</span> <span class="fu">write</span>(binary_file, <span class="dt">UInt8</span>[<span class="bn">0x41</span>, <span class="bn">0x42</span>, <span class="bn">0x43</span>, <span class="bn">0x0a</span>])</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Функция write записала байт: "</span>, bytes_written)</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Байты после read: "</span>, <span class="fu">read</span>(binary_file))</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>numeric_table <span class="op">=</span> [<span class="fl">1.0</span> <span class="fl">2.0</span> <span class="fl">3.0</span>; <span class="fl">4.0</span> <span class="fl">5.0</span> <span class="fl">6.0</span>]</span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a><span class="fu">writedlm</span>(table_file, numeric_table, <span class="ch">','</span>)</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>table_from_file <span class="op">=</span> <span class="fu">readdlm</span>(table_file, <span class="ch">','</span>, <span class="dt">Float64</span>)</span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Таблица после readdlm:"</span>)</span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(table_from_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Вывод print; вывод println
+"строка через show"
+Результат read(..., String):
+первая строка
+вторая строка
+третья строка
+
+Результат readline: первая строка
+Результат readlines: ["первая строка", "вторая строка", "третья строка"]
+Функция write записала байт: 4
+Байты после read: UInt8[0x41, 0x42, 0x43, 0x0a]
+Таблица после readdlm:</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>2×3 Matrix{Float64}:
+ 1.0  2.0  3.0
+ 4.0  5.0  6.0</code></pre>
+</div>
+</div>
+</section>
+<section id="самостоятельная-работа-parse-и-tryparse" class="level2">
+<h2 class="anchored" data-anchor-id="самостоятельная-работа-parse-и-tryparse">Самостоятельная работа: <code>parse</code> и <code>tryparse</code></h2>
+<p><code>parse</code> создаёт значение заданного типа или выбрасывает исключение. <code>tryparse</code> при некорректной строке возвращает <code>nothing</code>.</p>
+<div id="e061a324" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"parse(Int, </span><span class="sc">\"</span><span class="st">42</span><span class="sc">\"</span><span class="st">) = "</span>, <span class="fu">parse</span>(<span class="dt">Int</span>, <span class="st">"42"</span>))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"parse(Float64, </span><span class="sc">\"</span><span class="st">3.1415</span><span class="sc">\"</span><span class="st">) = "</span>, <span class="fu">parse</span>(<span class="dt">Float64</span>, <span class="st">"3.1415"</span>))</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"parse(Bool, </span><span class="sc">\"</span><span class="st">true</span><span class="sc">\"</span><span class="st">) = "</span>, <span class="fu">parse</span>(<span class="dt">Bool</span>, <span class="st">"true"</span>))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Двоичное 1010 = "</span>, <span class="fu">parse</span>(<span class="dt">Int</span>, <span class="st">"1010"</span>; base<span class="op">=</span><span class="fl">2</span>))</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Шестнадцатеричное ff = "</span>, <span class="fu">parse</span>(<span class="dt">Int</span>, <span class="st">"ff"</span>; base<span class="op">=</span><span class="fl">16</span>))</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"tryparse(Int, </span><span class="sc">\"</span><span class="st">123</span><span class="sc">\"</span><span class="st">) = "</span>, <span class="fu">tryparse</span>(<span class="dt">Int</span>, <span class="st">"123"</span>))</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"tryparse(Int, </span><span class="sc">\"</span><span class="st">abc</span><span class="sc">\"</span><span class="st">) = "</span>, <span class="fu">tryparse</span>(<span class="dt">Int</span>, <span class="st">"abc"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>parse(Int, "42") = 42
+parse(Float64, "3.1415") = 3.1415
+parse(Bool, "true") = true
+Двоичное 1010 = 10
+Шестнадцатеричное ff = 255
+tryparse(Int, "123") = 123
+tryparse(Int, "abc") = nothing</code></pre>
+</div>
+</div>
+</section>
+<section id="самостоятельная-работа-математические-операции" class="level2">
+<h2 class="anchored" data-anchor-id="самостоятельная-работа-математические-операции">Самостоятельная работа: математические операции</h2>
+<div id="b9958ccf" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fl">7</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="fl">3</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"x + y = "</span>, x <span class="op">+</span> y)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"x - y = "</span>, x <span class="op">-</span> y)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"x * y = "</span>, x <span class="op">*</span> y)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"x / y = "</span>, x <span class="op">/</span> y)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"div(x, y) = "</span>, <span class="fu">div</span>(x, y))</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"rem(x, y) = "</span>, <span class="fu">rem</span>(x, y))</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"x^y = "</span>, x<span class="op">^</span>y)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"sqrt(9.0) = "</span>, <span class="fu">sqrt</span>(<span class="fl">9.0</span>))</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"sqrt(-1 + 0im) = "</span>, <span class="fu">sqrt</span>(<span class="op">-</span><span class="fl">1</span> <span class="op">+</span> <span class="fl">0im</span>))</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Сравнения: "</span>, (x <span class="op">&gt;</span> y, x <span class="op">&lt;</span> y, x <span class="op">==</span> y, x <span class="op">!=</span> y, x <span class="op">&gt;=</span> y))</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="cn">true</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="cn">false</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"p &amp;&amp; q = "</span>, p <span class="op">&amp;&amp;</span> q)</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"p || q = "</span>, p <span class="op">||</span> q)</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"!p = "</span>, !p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x + y = 10
+x - y = 4
+x * y = 21
+x / y = 2.3333333333333335
+div(x, y) = 2
+rem(x, y) = 1
+x^y = 343
+sqrt(9.0) = 3.0
+sqrt(-1 + 0im) = 0.0 + 1.0im
+Сравнения: (true, false, false, true, true)
+p &amp;&amp; q = false
+p || q = true
+!p = false</code></pre>
+</div>
+</div>
+</section>
+<section id="самостоятельная-работа-векторы-и-матрицы" class="level2">
+<h2 class="anchored" data-anchor-id="самостоятельная-работа-векторы-и-матрицы">Самостоятельная работа: векторы и матрицы</h2>
+<div id="7702cfa9" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> [<span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>]</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> [<span class="fl">4.0</span>, <span class="fl">5.0</span>, <span class="fl">6.0</span>]</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> [<span class="fl">1.0</span> <span class="fl">2.0</span> <span class="fl">3.0</span>; <span class="fl">4.0</span> <span class="fl">5.0</span> <span class="fl">6.0</span>; <span class="fl">7.0</span> <span class="fl">8.0</span> <span class="fl">10.0</span>]</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> [<span class="fl">2.0</span> <span class="fl">0.0</span> <span class="fl">1.0</span>; <span class="fl">1.0</span> <span class="fl">3.0</span> <span class="fl">2.0</span>; <span class="fl">0.0</span> <span class="fl">1.0</span> <span class="fl">4.0</span>]</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"v + w = "</span>, v <span class="op">+</span> w)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"v - w = "</span>, v <span class="op">-</span> w)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"dot(v, w) = "</span>, <span class="fu">dot</span>(v, w))</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"transpose(v) = "</span>, <span class="fu">transpose</span>(v))</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"2v = "</span>, <span class="fl">2</span> <span class="op">.*</span> v)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"A + B ="</span>)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(A <span class="op">+</span> B)</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"A - B ="</span>)</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(A <span class="op">-</span> B)</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"A * v = "</span>, A <span class="op">*</span> v)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"A * B ="</span>)</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(A <span class="op">*</span> B)</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Поэлементное A .* B ="</span>)</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(A <span class="op">.*</span> B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>v + w = [5.0, 7.0, 9.0]
+v - w = [-3.0, -3.0, -3.0]
+dot(v, w) = 32.0
+transpose(v) = transpose([1.0, 2.0, 3.0])
+2v = [2.0, 4.0, 6.0]
+A + B =
+A - B =
+A * v = [14.0, 32.0, 53.0]
+A * B =
+Поэлементное A .* B =</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>3×3 Matrix{Float64}:
+ 3.0  2.0   4.0
+ 5.0  8.0   8.0
+ 7.0  9.0  14.0</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>3×3 Matrix{Float64}:
+ -1.0  2.0  2.0
+  3.0  2.0  4.0
+  7.0  7.0  6.0</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>3×3 Matrix{Float64}:
+  4.0   9.0  17.0
+ 13.0  21.0  38.0
+ 22.0  34.0  63.0</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>3×3 Matrix{Float64}:
+ 2.0   0.0   3.0
+ 4.0  15.0  12.0
+ 0.0   8.0  40.0</code></pre>
+</div>
+</div>
+</section>
+<section id="вычисление-для-набора-параметров" class="level2">
+<h2 class="anchored" data-anchor-id="вычисление-для-набора-параметров">Вычисление для набора параметров</h2>
+<p>Для каждого значения параметра <span class="math inline">\(\alpha\)</span> масштабируем матрицу, умножаем её на вектор и вычисляем норму матрицы.</p>
+<div id="a3bf2d91" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>parameters <span class="op">=</span> [<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">2.0</span>]</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>parameter_results <span class="op">=</span> [</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">calculate_for_parameter</span>(alpha, A, v) for alpha <span class="kw">in</span> parameters</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> result <span class="kw">in</span> parameter_results</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"alpha="</span>, result.alpha,</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">", норма="</span>, <span class="fu">round</span>(result.matrix_norm; digits<span class="op">=</span><span class="fl">3</span>),</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">", результат="</span>, result.result,</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>alpha=0.5, норма=8.718, результат=[7.0, 16.0, 26.5]
+alpha=1.0, норма=17.436, результат=[14.0, 32.0, 53.0]
+alpha=2.0, норма=34.871, результат=[28.0, 64.0, 106.0]</code></pre>
+</div>
+</div>
+<p>Представим результаты в таблице и сохраним в воспроизводимых форматах.</p>
+<div id="e05e0e99" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>results_table <span class="op">=</span> <span class="fu">DataFrame</span>(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span>[result.alpha for result <span class="kw">in</span> parameter_results],</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    matrix_norm<span class="op">=</span>[result.matrix_norm for result <span class="kw">in</span> parameter_results],</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    result_1<span class="op">=</span>[result.result[<span class="fl">1</span>] for result <span class="kw">in</span> parameter_results],</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    result_2<span class="op">=</span>[result.result[<span class="fl">2</span>] for result <span class="kw">in</span> parameter_results],</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    result_3<span class="op">=</span>[result.result[<span class="fl">3</span>] for result <span class="kw">in</span> parameter_results],</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Таблица результатов для набора параметров:"</span>)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="fu">display</span>(results_table)</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>csv_file <span class="op">=</span> <span class="fu">datadir</span>(<span class="st">"exp_pro"</span>, <span class="st">"parameter_results.csv"</span>)</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>jld2_file <span class="op">=</span> <span class="fu">datadir</span>(<span class="st">"sims"</span>, <span class="st">"parameter_results.jld2"</span>)</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>CSV.<span class="fu">write</span>(csv_file, results_table)</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="pp">@save</span> jld2_file parameters parameter_results results_table</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"CSV сохранён: "</span>, csv_file)</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"JLD2 сохранён: "</span>, jld2_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Таблица результатов для набора параметров:
+CSV сохранён: /home/asvedjmina/university/static_analys/labs/lab01/project/data/exp_pro/parameter_results.csv
+JLD2 сохранён: /home/asvedjmina/university/static_analys/labs/lab01/project/data/sims/parameter_results.jld2</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div><div style="float: left;"><span>3×5 DataFrame</span></div><div style="clear: both;"></div></div><div class="data-frame" style="overflow-x: scroll;">
+<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header columnLabelRow">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;">Row</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">alpha</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">matrix_norm</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">result_1</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">result_2</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">result_3</th>
+</tr>
+<tr class="odd columnLabelRow">
+<th class="stubheadLabel" data-quarto-table-cell-role="th" style="text-align: right; font-weight: bold;"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th" title="Float64">Float64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd dataRow">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">1</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">8.7178</td>
+<td style="text-align: right;">7.0</td>
+<td style="text-align: right;">16.0</td>
+<td style="text-align: right;">26.5</td>
+</tr>
+<tr class="even dataRow">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">2</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">17.4356</td>
+<td style="text-align: right;">14.0</td>
+<td style="text-align: right;">32.0</td>
+<td style="text-align: right;">53.0</td>
+</tr>
+<tr class="odd dataRow">
+<td class="rowLabel" style="text-align: right; font-weight: bold;">3</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">34.8712</td>
+<td style="text-align: right;">28.0</td>
+<td style="text-align: right;">64.0</td>
+<td style="text-align: right;">106.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>Построим график зависимости нормы масштабированной матрицы от параметра.</p>
+<div id="b23b3638" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkpath</span>(<span class="fu">plotsdir</span>())</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>parameter_plot <span class="op">=</span> <span class="fu">plot</span>(</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    results_table.alpha,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    results_table.matrix_norm;</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    marker<span class="op">=:</span>circle,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">2</span>,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">"alpha"</span>,</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>    ylabel<span class="op">=</span><span class="st">"Норма матрицы"</span>,</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"norm(alpha * A)"</span>,</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Вычисление для набора параметров"</span>,</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>plot_file <span class="op">=</span> <span class="fu">plotsdir</span>(<span class="st">"parameter_norms.png"</span>)</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="fu">savefig</span>(parameter_plot, plot_file)</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"График сохранён: "</span>, plot_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>График сохранён: /home/asvedjmina/university/static_analys/labs/lab01/project/plots/parameter_norms.png</code></pre>
+</div>
+</div>
+</section>
+<section id="пример-решения-обыкновенного-дифференциального-уравнения" class="level2">
+<h2 class="anchored" data-anchor-id="пример-решения-обыкновенного-дифференциального-уравнения">Пример решения обыкновенного дифференциального уравнения</h2>
+<p>Решим задачу <span class="math inline">\(u'=-u\)</span>, <span class="math inline">\(u(0)=1\)</span> на отрезке <span class="math inline">\([0,5]\)</span>.</p>
+<div id="80eb8439" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">decay!</span>(du, u, parameter, time) <span class="op">=</span> (du[<span class="fl">1</span>] <span class="op">=</span> <span class="op">-</span>parameter <span class="op">*</span> u[<span class="fl">1</span>])</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>ode_problem <span class="op">=</span> <span class="fu">ODEProblem</span>(decay!, [<span class="fl">1.0</span>], (<span class="fl">0.0</span>, <span class="fl">5.0</span>), <span class="fl">1.0</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>ode_solution <span class="op">=</span> <span class="fu">solve</span>(ode_problem, <span class="fu">Tsit5</span>(); saveat<span class="op">=</span><span class="fl">1.0</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Решение ОДУ в узлах: "</span>, <span class="fu">first</span>.(ode_solution.u))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Решение ОДУ в узлах: [1.0, 0.3678796381978341, 0.13533581256777455, 0.04978770787351412, 0.018315275151814518, 0.006738503575123539]</code></pre>
+</div>
+</div>
+</section>
+<section id="простейшее-измерение-времени" class="level2">
+<h2 class="anchored" data-anchor-id="простейшее-измерение-времени">Простейшее измерение времени</h2>
+<div id="3768d27d" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>elapsed <span class="op">=</span> <span class="pp">@belapsed</span> <span class="fu">sum</span>(<span class="op">$</span>v)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">println</span>(<span class="st">"Оценка времени sum(v), секунд: "</span>, elapsed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Оценка времени sum(v), секунд: 1.925e-9</code></pre>
+</div>
+</div>
+</section>
+<section id="вывод" class="level2">
+<h2 class="anchored" data-anchor-id="вывод">Вывод</h2>
+<p>Рабочая среда Julia и структура DrWatson подготовлены. На примерах изучены типы данных, функции, массивы, ввод-вывод, преобразование строк, базовая математика и операции линейной алгебры. Один литературный исходник позволяет воспроизводимо получить чистый код, Jupyter Notebook и документацию Quarto.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

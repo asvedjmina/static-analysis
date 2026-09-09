@@ -1,0 +1,35 @@
+# Лабораторная работа №1
+
+Краткие ссылки на репозитории, релизы и материалы первой лабораторной работы.
+
+## Репозитории
+
+### GitHub
+
+- [Основной репозиторий](https://github.com/asvedjmina/static-analysis)
+- [Каталог лабораторной работы](https://github.com/asvedjmina/static-analysis/tree/master/labs/lab01)
+- [Релиз `lab01`](https://github.com/asvedjmina/static-analysis/releases/tag/lab01)
+- [CHANGELOG](https://github.com/asvedjmina/static-analysis/blob/master/CHANGELOG.md)
+
+### GitVerse
+
+- [Основной репозиторий](https://gitverse.ru/asvedjmina/static-analysis)
+- [Каталог лабораторной работы](https://gitverse.ru/asvedjmina/static-analysis/content/master/labs/lab01)
+- [Релиз `v1.0.0`](https://gitverse.ru/asvedjmina/static-analysis/releases/tag/v1.0.0)
+- [CHANGELOG](https://gitverse.ru/asvedjmina/static-analysis/content/master/CHANGELOG.md)
+
+## Состав материалов
+
+- `lab01.zip` с полной директорией лабораторной работы;
+- Julia-исходники и зафиксированное окружение проекта;
+- выполненный Jupyter Notebook;
+- Quarto-документация;
+- CSV, JLD2, тестовые данные и график;
+- скриншоты фактического выполнения;
+- отчёт в форматах QMD, PDF и DOCX;
+- презентация в форматах QMD, PDF и HTML.
+
+## Теги
+
+- учебный тег: `lab01`;
+- семантическая версия: `v1.0.0`.
