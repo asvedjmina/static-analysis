@@ -364,3 +364,6 @@ plugins
 .vbox/
 .config/
 vm/
+
+## Local files excluded from laboratory releases
+/no-commit/
