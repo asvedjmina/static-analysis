@@ -1,0 +1,7 @@
+/.julia
+/.quarto
+/.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+/generated/*_files/
+*.jl.cov
+*.jl.mem

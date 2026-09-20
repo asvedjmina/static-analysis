@@ -1,3 +1,5 @@
+\usepackage{fontspec}
+
 %%% Load theme
 \IfFileExists{beamerthemegotham.sty}{
   %%%% Full TeXlive
@@ -23,3 +25,6 @@
   %%%% https://deic.uab.cat/~iblanes/beamer_gallery/
   \usetheme{Madrid}
 }
+
+% Тема может менять моноширинный шрифт, поэтому назначаем его последним.
+\setmonofont{DejaVu Sans Mono}[Scale=0.78]

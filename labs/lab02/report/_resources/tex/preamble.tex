@@ -1,5 +1,6 @@
 \usepackage{indentfirst}
 \usepackage{float}
+\usepackage{fontspec}
 \floatplacement{figure}{H}
 \IfFileExists{plex-otf.sty}{
   %% Full TeXlive
@@ -13,3 +14,6 @@
   %% TinyTeX
   \usepackage{libertine}
 }
+
+% Назначаем после темы: plex-otf иначе повторно переопределяет моноширинный шрифт.
+\setmonofont{DejaVu Sans Mono}[Scale=0.82]
