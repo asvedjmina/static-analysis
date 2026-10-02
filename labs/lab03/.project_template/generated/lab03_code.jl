@@ -1,0 +1,194 @@
+using DrWatson
+@quickactivate "Lab03ControlStructures"
+
+using Colors
+using Lab03ControlStructures
+using LinearAlgebra
+using Random
+
+n = 0
+while n < 10
+    global n += 1
+    println(n)
+end
+
+myfriends = ["Ted", "Robyn", "Barney", "Lily", "Marshall"]
+
+i = 1
+while i <= length(myfriends)
+    friend = myfriends[i]
+    println("Hi $friend, it's great to see you!")
+    global i += 1
+end
+
+for friend in myfriends
+    println("Hi $friend, it's great to see you!")
+end
+
+for number in 1:2:10
+    println(number)
+end
+
+m, n = 5, 5
+A_loop = fill(0, (m, n))
+for row in 1:m
+    for column in 1:n
+        A_loop[row, column] = row + column
+    end
+end
+
+B_loop = fill(0, (m, n))
+for row in 1:m, column in 1:n
+    B_loop[row, column] = row + column
+end
+
+C_comprehension = [row + column for row in 1:m, column in 1:n]
+display(A_loop)
+println("Все три матрицы совпадают: ", A_loop == B_loop == C_comprehension)
+
+function fizzbuzz(number)
+    if number % 3 == 0 && number % 5 == 0
+        return "FizzBuzz"
+    elseif number % 3 == 0
+        return "Fizz"
+    elseif number % 5 == 0
+        return "Buzz"
+    else
+        return number
+    end
+end
+
+for number in (3, 5, 15, 17)
+    println("$number → ", fizzbuzz(number))
+end
+
+x, y = 5, 10
+println("Максимум через тернарный оператор: ", x > y ? x : y)
+
+function sayhi(name)
+    println("Hi $name, it's great to see you!")
+end
+
+function f(value)
+    value^2
+end
+
+sayhi2(name) = println("Hi $name, it's great to see you!")
+f2(value) = value^2
+sayhi3 = name -> println("Hi $name, it's great to see you!")
+f3 = value -> value^2
+
+sayhi("C-3PO")
+sayhi2("R2-D2")
+sayhi3("BB-8")
+println("Три способа задать квадрат: ", (f(42), f2(42), f3(42)))
+
+v = [3, 5, 2]
+println("sort(v) = ", sort(v), "; исходный v = ", v)
+sort!(v)
+println("После sort!(v): ", v)
+
+println("map(f, [1, 2, 3]) = ", map(f, [1, 2, 3]))
+println("map(x -> x^3, [1, 2, 3]) = ", map(value -> value^3, [1, 2, 3]))
+println("broadcast(f, [1, 2, 3]) = ", broadcast(f, [1, 2, 3]))
+
+A_broadcast = [column + 3row for row in 0:2, column in 1:3]
+println("A =")
+display(A_broadcast)
+println("f(A) = A² =")
+display(f(A_broadcast))
+println("f.(A) — квадраты элементов =")
+display(f.(A_broadcast))
+
+expression_1 = A_broadcast .+ 2 .* f.(A_broadcast) ./ A_broadcast
+expression_2 = @. A_broadcast + 2 * f(A_broadcast) / A_broadcast
+expression_3 = broadcast(value -> value + 2 * f(value) / value, A_broadcast)
+display(expression_1)
+println("Три формы broadcast совпадают: ", expression_1 == expression_2 == expression_3)
+
+palette = distinguishable_colors(100)
+color_rng = MersenneTwister(2026)
+color_matrix = rand(color_rng, palette, 3, 3)
+println("Матрица случайных цветов:")
+display(color_matrix)
+
+while_result = squares_with_while()
+for_result = squares_with_for()
+
+println("Результат цикла while:")
+pair_index = 1
+while pair_index <= length(while_result.numbers_and_squares)
+    number, square = while_result.numbers_and_squares[pair_index]
+    println(number, "² = ", square)
+    global pair_index += 1
+end
+
+println("Результат цикла for:")
+for (number, square) in for_result.numbers_and_squares
+    println(number, "² = ", square)
+end
+
+println("squares[10] = ", for_result.squares[10])
+println("squares_arr = ", for_result.squares_arr)
+println("Результаты while и for совпадают: ", while_result == for_result)
+
+for number in 1:4
+    println("if: $number → ", even_or_odd(number),
+            "; тернарный: ", even_or_odd_ternary(number))
+end
+
+println("add_one(41) = ", add_one(41))
+A_increasing = increasing_matrix(3, 4)
+println("Матрица последовательных чисел, построенная через map(add_one, ...):")
+display(A_increasing)
+
+power_task = matrix_power_task()
+println("A =")
+display(power_task.A)
+println("A³ =")
+display(power_task.A_cubed)
+println("A после замены третьего столбца:")
+display(power_task.A_modified)
+
+product_task = matrix_product_task()
+println("B =")
+display(product_task.B)
+println("C = BᵀB =")
+display(product_task.C)
+
+patterns = pattern_matrices()
+for name in (:Z, :E, :Z1, :Z2, :Z3, :Z4)
+    println(name, " =")
+    display(getproperty(patterns, name))
+end
+
+left_matrix = [1 2; 3 4]
+right_matrix = [5 6; 7 8]
+println("outer(A, B, *) == A * B: ",
+        outer(left_matrix, right_matrix, *) == left_matrix * right_matrix)
+
+outer_result = outer_matrices()
+for name in (:A1, :A2, :A3, :A4, :A5)
+    println(name, " =")
+    display(getproperty(outer_result, name))
+end
+
+system_result = structured_system()
+println("Структурная матрица системы A =")
+display(system_result.A)
+println("Решение x = ", system_result.x)
+println("Проверка A*x ≈ y: ", system_result.A * system_result.x ≈ system_result.y)
+
+random_result = random_matrix_task()
+println("M =")
+display(random_result.M)
+println("Количество элементов > 4 по строкам: ", random_result.greater_counts)
+println("Строки, где число 7 встречается ровно дважды: ", random_result.matching_rows)
+println("Суммы столбцов: ", random_result.column_sums)
+println("Пары столбцов с общей суммой > 75: ", random_result.qualifying_pairs)
+
+sums = nested_sums()
+println("Первая сумма (точно): ", sums.first_sum)
+println("Первая сумма (приближённо): ", Float64(sums.first_sum))
+println("Вторая сумма (точно): ", sums.second_sum)
+println("Вторая сумма (приближённо): ", Float64(sums.second_sum))

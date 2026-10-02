@@ -4,6 +4,9 @@ project:
 
 standalone: true
 self-contained: true
+code-overflow: wrap
+code-line-numbers: false
+fig-cap-location: bottom
 
 ## Julia support
 # engine: julia
@@ -34,7 +37,7 @@ format:
     toc-depth: 2
   ### Pdf output format
   pdf:
-    # pdf-engine: xelatex
+    pdf-engine: xelatex
     ### minted support
     # filters:
     #   - minted-quarto

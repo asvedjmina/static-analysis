@@ -1,0 +1,7 @@
+* text=auto
+*.jl text eol=lf
+*.md text eol=lf
+*.qmd text eol=lf
+*.ipynb text eol=lf
+*.html text eol=lf
+*.png binary

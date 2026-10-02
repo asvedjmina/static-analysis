@@ -1,12 +1,16 @@
 project:
   title: "presentation"
   output-dir: "_output"
+  render:
+    - computer-practice-lab03-presentation.qmd
 
 standalone: true
 self-contained: true
 embed-resources: true
 slide-level: 2
 lang: ru-RU
+code-overflow: wrap
+fig-cap-location: bottom
 crossref:
   lof-title: Список иллюстраций
   lot-title: Список таблиц

@@ -1,6 +1,17 @@
 \usepackage{indentfirst}
 \usepackage{float}
+\makeatletter
+\input{_resources/tex/fvextra.sty}
+\makeatother
 \floatplacement{figure}{H}
+\AtBeginDocument{%
+  \RecustomVerbatimEnvironment{Highlighting}{Verbatim}{%
+    commandchars=\\\{\},
+    breaklines=true,
+    breakanywhere=true,
+    fontsize=\small
+  }%
+}
 \IfFileExists{plex-otf.sty}{
   %% Full TeXlive
   \usepackage[
@@ -13,3 +24,5 @@
   %% TinyTeX
   \usepackage{libertine}
 }
+% Моноширинный шрифт с полной поддержкой кириллицы в листингах Julia.
+\setmonofont{DejaVu Sans Mono}[Scale=0.78]
