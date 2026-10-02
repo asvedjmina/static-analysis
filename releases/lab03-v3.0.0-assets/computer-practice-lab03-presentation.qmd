@@ -1,0 +1,634 @@
+---
+author:
+  name: Ведьмина Александра Сергеевна
+  degrees: student
+  email: 1132236003@rudn.ru
+  affiliation:
+    - name: Российский университет дружбы народов
+      country: Российская Федерация
+      postal-code: 117198
+      city: Москва
+      address: ул. Миклухо-Маклая, д. 6
+title: Лабораторная работа №3
+subtitle: "Управляющие структуры"
+license: CC BY
+date: today
+date-format: "YYYY-MM-DD"
+format:
+  beamer:
+    incremental: false
+    toc: false
+  revealjs:
+    incremental: false
+---
+
+## Содержание
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+- цель и задачи;
+- проект `DrWatson`;
+- циклы и условия;
+- функции и `broadcast`;
+
+:::
+::: {.column width="50%"}
+
+- матричные задания;
+- функция `outer`;
+- система и двойные суммы;
+- notebook, Quarto и тесты.
+
+:::
+::::::::::::::
+
+# Информация
+
+## Докладчик
+
+:::::::::::::: {.columns align=center}
+::: {.column width="68%"}
+
+- Ведьмина Александра Сергеевна
+- студентка
+- кафедра теории вероятностей и кибербезопасности
+- Российский университет дружбы народов
+- [1132236003@rudn.ru](mailto:1132236003@rudn.ru)
+
+:::
+::: {.column width="32%"}
+
+![](../report/image/me.jpg)
+
+:::
+::::::::::::::
+
+# Вводная часть
+
+## Цель и задачи
+
+**Цель:** освоить управляющие структуры Julia и применить их к задачам
+линейной алгебры и работе с матрицами.
+
+Задачи:
+
+- повторить `while`, `for`, `if` и тернарный оператор;
+- изучить формы функций, `map` и `broadcast`;
+- выполнить 11 самостоятельных заданий;
+- сформировать обобщаемые матричные алгоритмы;
+- получить notebook и Quarto-документ;
+- проверить решения автоматическими тестами.
+
+## Инструменты
+
+- Julia `1.12.5`;
+- `DrWatson` --- структура проекта;
+- `Colors` --- сторонний пакет из примеров;
+- `LinearAlgebra` и `Random`;
+- `Literate` --- единый источник документов;
+- `IJulia` и Jupyter Lab;
+- Quarto --- HTML, PDF и презентация;
+- `Test` --- автоматическая проверка.
+
+# Проект `DrWatson`
+
+## Создание нового проекта {.smaller}
+
+:::::::::::::: {.columns align=center}
+::: {.column width="58%"}
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-52-54.png)
+
+:::
+::: {.column width="42%"}
+
+`initialize_project` создал:
+
+- `Project.toml` и `Manifest.toml`;
+- `src/` и `scripts/`;
+- `data/`, `plots/`, `notebooks/`;
+- `test/`;
+- окружение с `DrWatson`.
+
+:::
+::::::::::::::
+
+## Установка зависимостей
+
+:::::::::::::: {.columns align=center}
+::: {.column width="50%"}
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-54-30.png)
+
+:::
+::: {.column width="50%"}
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-54-52.png)
+
+:::
+::::::::::::::
+
+- зависимости установлены и скомпилированы;
+- версии зафиксированы в `Manifest.toml`.
+
+## Активация окружения
+
+:::::::::::::: {.columns align=center}
+::: {.column width="48%"}
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-55-02.png)
+
+Julia запущена с `--project`.
+
+:::
+::: {.column width="52%"}
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-55-23.png)
+
+Проверены `projectdir`, `srcdir`, `scriptsdir` и `datadir`.
+
+:::
+::::::::::::::
+
+# Управляющие структуры
+
+## Циклы `while` и `for`
+
+```julia
+n = 0
+while n < 10
+    global n += 1
+    println(n)
+end
+
+for friend in myfriends
+    println("Hi $friend!")
+end
+
+A = [i + j for i in 1:5, j in 1:5]
+```
+
+- `while` выполняется, пока условие истинно;
+- `for` перебирает диапазон или коллекцию;
+- comprehension компактно создаёт матрицу.
+
+## Условия и функции
+
+```julia
+function fizzbuzz(number)
+    if number % 15 == 0
+        return "FizzBuzz"
+    elseif number % 3 == 0
+        return "Fizz"
+    elseif number % 5 == 0
+        return "Buzz"
+    else
+        return number
+    end
+end
+
+f(x) = x^2
+f3 = x -> x^2
+```
+
+## `map` и `broadcast`
+
+Для матрицы $A$:
+
+```julia
+map(f, [1, 2, 3])
+broadcast(f, [1, 2, 3])
+f.(A)
+
+@. A + 2 * f(A) / A
+```
+
+- `f(A)` вычисляет матричный квадрат $A^2$;
+- `f.(A)` возводит в квадрат каждый элемент;
+- точечный синтаксис объединяет поэлементные операции.
+
+## Сторонний пакет `Colors`
+
+:::::::::::::: {.columns align=center}
+::: {.column width="52%"}
+
+```julia
+palette = distinguishable_colors(100)
+rng = MersenneTwister(2026)
+color_matrix = rand(
+    rng, palette, 3, 3,
+)
+display(color_matrix)
+```
+
+- создана палитра из `100` оттенков;
+- seed обеспечивает воспроизводимость.
+
+:::
+::: {.column width="48%"}
+
+![](../report/image/color_matrix.png){width=76%}
+
+Матрица случайных цветов $3\times3$.
+
+:::
+::::::::::::::
+
+# Самостоятельная работа
+
+## Задание 1: цикл `while` {.smaller}
+
+```julia
+number = 1
+while number <= 100
+    square = number^2
+    squares[number] = square
+    push!(squares_arr, square)
+    number += 1
+end
+```
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-56-09.png){width=61%}
+
+## Задание 1: полный результат {.smaller}
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-56-17.png){width=94%}
+
+- выведены все числа и квадраты;
+- `squares[10] == 100`;
+- `squares_arr[end] == 10000`;
+- реализации `while` и `for` совпали.
+
+## Задания 2 и 3
+
+:::::::::::::: {.columns align=center}
+::: {.column width="58%"}
+
+```julia
+function even_or_odd(number)
+    if iseven(number)
+        return number
+    else
+        return "нечётное"
+    end
+end
+
+even_or_odd_ternary(number) =
+    iseven(number) ? number : "нечётное"
+
+add_one(value) = value + one(value)
+```
+
+:::
+::: {.column width="42%"}
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-56-31.png)
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-56-49.png)
+
+:::
+::::::::::::::
+
+## Задание 4: возрастающая матрица
+
+```julia
+predecessors = [
+    (row - 1) * columns + column - 1
+    for row in 1:rows, column in 1:columns
+]
+A = map(add_one, predecessors)
+```
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-57-09.png){width=90%}
+
+## Задание 5: третья степень
+
+:::::::::::::: {.columns align=center}
+::: {.column width="42%"}
+
+```julia
+A = [1 1 3;
+     5 2 6;
+    -2 -1 -3]
+
+A_cubed = A^3
+A_modified = copy(A)
+A_modified[:, 3] .=
+    A[:, 2] .+ A[:, 3]
+```
+
+Результат: $A^3=0$.
+
+:::
+::: {.column width="58%"}
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-57-21.png)
+
+:::
+::::::::::::::
+
+## Задание 6: матрицы $B$ и $C$
+
+```julia
+B = repeat([10 -10 10], 15, 1)
+C = transpose(B) * B
+```
+
+$$
+C=\begin{pmatrix}
+1500&-1500&1500\\
+-1500&1500&-1500\\
+1500&-1500&1500
+\end{pmatrix}.
+$$
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-57-49.png){width=78%}
+
+## Задание 7: структурные матрицы {.smaller}
+
+:::::::::::::: {.columns align=center}
+::: {.column width="42%"}
+
+```julia
+for i in 1:n, j in 1:n
+    Z1[i, j] = abs(i - j) == 1
+    Z2[i, j] =
+        abs(i - j) in (0, 2)
+    reflected = n - j + 1
+    Z3[i, j] =
+        abs(i - reflected) in (0, 2)
+    Z4[i, j] = iseven(i + j)
+end
+```
+
+:::
+::: {.column width="58%"}
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-58-04.png)
+
+:::
+::::::::::::::
+
+## Задание 8: функция `outer` {.smaller}
+
+:::::::::::::: {.columns align=center}
+::: {.column width="43%"}
+
+```julia
+function outer(x, y, op)
+    [op(a, b)
+     for a in x, b in y]
+end
+
+function outer(A, B, op)
+    [sum(op(A[i, k], B[k, j])
+         for k in axes(A, 2))
+     for i in axes(A, 1),
+         j in axes(B, 2)]
+end
+```
+
+:::
+::: {.column width="57%"}
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-58-19.png)
+
+:::
+::::::::::::::
+
+## Матрицы функции `outer`
+
+| Матрица | Размер | Элемент |
+|:---:|:---:|:---|
+| $A_1$ | $5\times5$ | $i+j$ |
+| $A_2$ | $5\times5$ | $i^{j+1}$ |
+| $A_3$ | $5\times5$ | $(i+j)\bmod5$ |
+| $A_4$ | $10\times10$ | $(i+j)\bmod10$ |
+| $A_5$ | $9\times9$ | $(i-j)\bmod9$ |
+
+Проверка:
+
+```julia
+outer(A, B, *) == A * B  # true
+```
+
+## Задание 9: система уравнений
+
+:::::::::::::: {.columns align=center}
+::: {.column width="42%"}
+
+```julia
+n = length(y)
+A = [abs(i - j) + 1
+     for i in 1:n, j in 1:n]
+x = A \ y
+```
+
+$$
+x=(-2,3,5,2,-4)^T.
+$$
+
+Проверка `A*x ≈ y` истинна.
+
+:::
+::: {.column width="58%"}
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-58-39.png)
+
+:::
+::::::::::::::
+
+## Задание 10: случайная матрица {.smaller}
+
+:::::::::::::: {.columns align=center}
+::: {.column width="44%"}
+
+```julia
+rng = MersenneTwister(2026)
+M = rand(rng, 1:10, 6, 10)
+
+greater_counts = vec(
+    sum(M .> 4; dims=2),
+)
+matching_rows = findall(
+    vec(sum(M .== 7; dims=2)) .== 2,
+)
+```
+
+:::
+::: {.column width="56%"}
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-58-50.png)
+
+:::
+::::::::::::::
+
+## Результаты задания 10
+
+| Показатель | Результат |
+|:---|:---|
+| Элементов $>4$ по строкам | `[4, 5, 8, 6, 4, 5]` |
+| Две семёрки | строка `6` |
+| Суммы столбцов | `41, 23, 27, 29, 29, 34, 36, 31, 39, 27` |
+| Сумма пары $>75$ | `(1,7): 77`, `(1,9): 80` |
+
+Фиксированное начальное состояние генератора обеспечивает воспроизводимость.
+
+## Задание 11: двойные суммы
+
+:::::::::::::: {.columns align=center}
+::: {.column width="48%"}
+
+```julia
+S1 = sum(
+    big(i)^4 // big(3 + j)
+    for i in 1:20 for j in 1:5
+)
+
+S2 = sum(
+    big(i)^4 // big(3 + i * j)
+    for i in 1:20 for j in 1:5
+)
+```
+
+:::
+::: {.column width="52%"}
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-59-08.png)
+
+:::
+::::::::::::::
+
+$$
+S_1\approx639215{,}2833,\qquad
+S_2\approx89912{,}02146.
+$$
+
+# Воспроизводимые материалы
+
+## Генерация документов {.smaller}
+
+:::::::::::::: {.columns align=center}
+::: {.column width="62%"}
+
+![](../report/image/Screenshot%20from%202026-10-02%2012-59-41.png)
+
+:::
+::: {.column width="38%"}
+
+Из одного literate-источника получены:
+
+- `lab03_code.jl`;
+- выполненный notebook;
+- `lab03_quarto.qmd`;
+- `lab03_quarto.html`.
+
+:::
+::::::::::::::
+
+## Quarto
+
+:::::::::::::: {.columns align=center}
+::: {.column width="49%"}
+
+![](../report/image/Screenshot%20from%202026-10-02%2013-00-01.png)
+
+Рендеринг завершён без ошибок.
+
+:::
+::: {.column width="51%"}
+
+![](../report/image/Screenshot%20from%202026-10-02%2013-00-24.png)
+
+HTML проверен в браузере.
+
+:::
+::::::::::::::
+
+## Запуск Jupyter Lab
+
+![](../report/image/Screenshot%20from%202026-10-02%2013-00-40.png){width=84%}
+
+- Jupyter запущен из окружения проекта;
+- открыт `lab03_control_structures.ipynb`;
+- выбрано ядро Julia `1.12.5`.
+
+## Выполненный notebook: начало
+
+![](../report/image/Screenshot%20from%202026-10-02%2013-01-40.png){width=94%}
+
+Начальные ячейки содержат цель работы и примеры циклов `while` и `for`.
+
+## Выполненный notebook: матрицы
+
+![](../report/image/Screenshot%20from%202026-10-02%2013-01-47.png){width=94%}
+
+Результаты матричных заданий сохранены непосредственно в notebook.
+
+## Выполненный notebook: итог
+
+![](../report/image/Screenshot%20from%202026-10-02%2013-01-55.png){width=94%}
+
+В заключительной части находятся двойные суммы и общий вывод.
+
+## Автоматические тесты
+
+:::::::::::::: {.columns align=center}
+::: {.column width="56%"}
+
+![](../report/image/Screenshot%20from%202026-10-02%2013-02-35.png)
+
+:::
+::: {.column width="44%"}
+
+Проверены:
+
+- циклы, условия и функции;
+- все матричные задания;
+- `outer` и система уравнений;
+- случайная матрица и суммы;
+- производные материалы.
+
+Все `54` теста пройдены.
+
+:::
+::::::::::::::
+
+# Результаты
+
+## Сводная таблица
+
+| Задание | Основной результат |
+|---:|:---|
+| 1 | $100^2=10000$ |
+| 5 | $A^3=0$ |
+| 6 | $C_{11}=C_{22}=C_{33}=1500$ |
+| 8 | построено пять семейств матриц |
+| 9 | $x=(-2,3,5,2,-4)^T$ |
+| 10 | пары `(1,7)` и `(1,9)` |
+| 11 | $S_1=38352917/60$ |
+
+## Воспроизводимость
+
+- решения вынесены в модуль `Lab03ControlStructures`;
+- размерности структурных матриц задаются параметрами;
+- случайная матрица фиксируется `seed=2026`;
+- большие рациональные суммы вычисляются без переполнения;
+- код, notebook и Quarto создаются из одного источника;
+- окружение зафиксировано `Project.toml` и `Manifest.toml`;
+- корректность подтверждена тестами.
+
+# Выводы
+
+## Итоги работы
+
+- освоены циклы и условные выражения Julia;
+- изучены функции, `map` и `broadcast`;
+- выполнены все 11 самостоятельных заданий;
+- реализованы обобщаемые матричные алгоритмы;
+- решена структурная система линейных уравнений;
+- сформированы notebook и Quarto-документ;
+- все `54` теста успешно пройдены.
+
+Цель лабораторной работы достигнута.
