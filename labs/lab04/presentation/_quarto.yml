@@ -36,6 +36,6 @@ format: # Formats
     slide-number: true
     output-ext: html
     theme:
-      - _resources/css/fonts.scss
       - beige
+      - _resources/css/fonts.scss
     logo: _resources/image/logo_rudn.png

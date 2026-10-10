@@ -1,0 +1,366 @@
+ENV["LAB04_TASK"] = "4.4.4.3"
+
+using DrWatson
+@quickactivate "project"
+
+using BenchmarkTools
+using LinearAlgebra
+using Random
+using Statistics
+
+include(srcdir("lab04.jl"))
+using .Lab04
+
+Random.seed!(20261010)
+
+function heading(title)
+    println("\n", repeat("=", 78))
+    println(title)
+    println(repeat("=", 78))
+end
+
+function print_system_result(label, coefficients, right_side)
+    result = solve_exact(coefficients, right_side)
+    descriptions = Dict(
+        :unique => "единственное решение",
+        :infinite => "бесконечно много решений",
+        :inconsistent => "решений нет",
+    )
+    println("\n", label, ": ", descriptions[result.kind])
+    println("rank(A) = ", result.rank_a, ", rank([A|b]) = ", result.rank_augmented)
+    println("RREF([A|b]) =")
+    display(result.rref)
+    if result.kind != :inconsistent
+        println("Частное решение: ", result.particular)
+        if result.kind == :infinite
+            println("Базис однородных решений: ", result.null_basis)
+            println("Общий вид: x = x₀ + Σ tᵢ nᵢ")
+        end
+    end
+    return result
+end
+
+function run_4_2_1()
+heading("4.2.1. Поэлементные операции")
+a = rand(1:20, (4, 3))
+println("a ="); display(a)
+println("sum(a) = ", sum(a))
+println("Суммы по столбцам:"); display(sum(a; dims=1))
+println("Суммы по строкам:"); display(sum(a; dims=2))
+println("prod(a) = ", prod(a))
+println("Произведения по столбцам:"); display(prod(a; dims=1))
+println("Произведения по строкам:"); display(prod(a; dims=2))
+println("mean(a) = ", mean(a))
+println("Средние по столбцам:"); display(mean(a; dims=1))
+println("Средние по строкам:"); display(mean(a; dims=2))
+end
+
+function run_4_2_2()
+heading("4.2.2. Основные матричные операции")
+function random_nonsingular_matrix(size; values=1:20)
+    while true
+        candidate = rand(values, (size, size))
+        !iszero(det(candidate)) && return candidate
+    end
+end
+b = random_nonsingular_matrix(4)
+println("b ="); display(b)
+println("transpose(b) ="); display(transpose(b))
+println("tr(b) = ", tr(b))
+println("diag(b) = ", diag(b))
+println("rank(b) = ", rank(b))
+println("inv(b) ="); display(inv(b))
+println("det(b) = ", det(b))
+    a = rand(1:20, (4, 3))
+println("pinv(a) ="); display(pinv(a))
+end
+
+function run_4_2_3()
+heading("4.2.3. Нормы, расстояние, угол и повороты")
+X = [2, 4, -5]
+Y = [1, -1, 3]
+println("norm(X) = ", norm(X))
+println("norm(X, 1) = ", norm(X, 1))
+println("norm(X - Y) = ", norm(X - Y))
+println("Проверка расстояния = ", sqrt(sum((X - Y) .^ 2)))
+angle = acos(clamp(dot(X, Y) / (norm(X) * norm(Y)), -1, 1))
+println("Угол X и Y, рад = ", angle)
+
+d = [5 -4 2; -1 2 3; -2 1 0]
+println("d ="); display(d)
+println("opnorm(d) = ", opnorm(d))
+println("opnorm(d, 1) = ", opnorm(d, 1))
+println("rot180(d) ="); display(rot180(d))
+println("reverse(d, dims=1) ="); display(reverse(d; dims=1))
+println("reverse(d, dims=2) ="); display(reverse(d; dims=2))
+end
+
+function run_4_2_4()
+heading("4.2.4. Умножение матриц и векторов")
+A_product = rand(1:10, (2, 3))
+B_product = rand(1:10, (3, 4))
+X = [2, 4, -5]
+Y = [1, -1, 3]
+println("A * B ="); display(A_product * B_product)
+println("Единичная матрица ="); display(Matrix{Int}(I, 3, 3))
+println("dot(X, Y) = ", dot(X, Y))
+println("X'Y = ", X'Y)
+end
+
+function run_4_2_5()
+heading("4.2.5. Факторизации")
+A_factor = rand(3, 3)
+x_known = fill(1.0, 3)
+b_factor = A_factor * x_known
+println("Решение A \\ b = ", A_factor \ b_factor)
+
+A_lu = lu(A_factor)
+println("Матрица перестановок P ="); display(A_lu.P)
+println("Вектор перестановок p = ", A_lu.p)
+println("L ="); display(A_lu.L)
+println("U ="); display(A_lu.U)
+println("Решение через LU = ", A_lu \ b_factor)
+println("det(A) = ", det(A_factor), ", det(lu(A)) = ", det(A_lu))
+println("Проверка P*A ≈ L*U: ", A_lu.P * A_factor ≈ A_lu.L * A_lu.U)
+
+A_qr = qr(A_factor)
+Q = Matrix(A_qr.Q)
+R = A_qr.R
+println("Q ="); display(Q)
+println("R ="); display(R)
+println("Q'Q ≈ I: ", Q' * Q ≈ I)
+println("Q*R ≈ A: ", Q * R ≈ A_factor)
+
+A_symmetric = A_factor + A_factor'
+A_eigen = eigen(Symmetric(A_symmetric))
+println("Собственные значения = ", A_eigen.values)
+println("Собственные векторы ="); display(A_eigen.vectors)
+println("V*Λ*V' ≈ A: ", A_eigen.vectors * Diagonal(A_eigen.values) * A_eigen.vectors' ≈ A_symmetric)
+
+#= Пример из пособия использует матрицу 1000×1000. Число замеров уменьшено до
+одного, чтобы сценарий удобно было повторять во время защиты. =#
+n_dense = 1000
+A_dense = randn(n_dense, n_dense)
+A_dense_symmetric = A_dense + A_dense'
+A_dense_noisy = copy(A_dense_symmetric)
+A_dense_noisy[1, 2] += 5eps()
+A_dense_explicit = Symmetric(A_dense_noisy)
+println("issymmetric(A_dense_symmetric) = ", issymmetric(A_dense_symmetric))
+println("issymmetric(A_dense_noisy) = ", issymmetric(A_dense_noisy))
+
+dense_symmetric_time = @belapsed eigvals($A_dense_symmetric) samples=1 evals=1
+dense_noisy_time = @belapsed eigvals($A_dense_noisy) samples=1 evals=1
+dense_explicit_time = @belapsed eigvals($A_dense_explicit) samples=1 evals=1
+println("eigvals симметричной матрицы: ", dense_symmetric_time, " с")
+println("eigvals зашумлённой матрицы: ", dense_noisy_time, " с")
+println("eigvals с явным Symmetric: ", dense_explicit_time, " с")
+
+n_tridiagonal = 1_000_000
+A_tridiagonal = SymTridiagonal(randn(n_tridiagonal), randn(n_tridiagonal - 1))
+tridiagonal_time = @belapsed eigmax($A_tridiagonal) samples=1 evals=1
+println("eigmax SymTridiagonal 1_000_000×1_000_000: ", tridiagonal_time, " с")
+println("Плотная версия потребовала бы примерно ",
+    round(n_tridiagonal^2 * sizeof(Float64) / 1024^4; digits=2), " ТиБ памяти и не создаётся.")
+end
+
+function run_4_2_6()
+heading("4.2.6. Рациональная линейная алгебра")
+A_rational = Rational{BigInt}.(rand(1:10, 3, 3)) ./ 10
+x_rational = fill(BigInt(1), 3)
+b_rational = A_rational * x_rational
+println("A_rational ="); display(A_rational)
+println("Точное решение = ", A_rational \ b_rational)
+println("LU для рациональной матрицы = "); display(lu(A_rational))
+end
+
+function run_4_4_1()
+heading("4.4.1. Произведение векторов")
+v = [1, 2, 3]
+dot_v = dot(v, v)
+outer_v = v * v'
+println("v = ", v)
+println("dot_v = v⋅v = ", dot_v)
+println("outer_v = v*v' ="); display(outer_v)
+end
+
+function run_4_4_2_1()
+heading("4.4.2. СЛАУ с двумя неизвестными")
+systems_two = [
+    ("a", [1 1; 1 -1], [2, 3]),
+    ("b", [1 1; 2 2], [2, 4]),
+    ("c", [1 1; 2 2], [2, 5]),
+    ("d", [1 1; 2 2; 3 3], [1, 2, 3]),
+    ("e", [1 1; 2 1; 1 -1], [2, 1, 3]),
+    ("f", [1 1; 2 1; 3 2], [2, 1, 3]),
+]
+for (label, coefficients, right_side) in systems_two
+    print_system_result(label, coefficients, right_side)
+end
+end
+
+function run_4_4_2_2()
+heading("4.4.2. СЛАУ с тремя неизвестными")
+systems_three = [
+    ("a", [1 1 1; 1 -1 -2], [2, 3]),
+    ("b", [1 1 1; 2 2 -3; 3 1 1], [2, 4, 1]),
+    ("c", [1 1 1; 1 1 2; 2 2 3], [1, 0, 1]),
+    ("d", [1 1 1; 1 1 2; 2 2 3], [1, 0, 0]),
+]
+for (label, coefficients, right_side) in systems_three
+    print_system_result(label, coefficients, right_side)
+end
+end
+
+function run_4_4_3_1()
+heading("4.4.3.1. Диагонализация")
+matrices_to_diagonalize = [
+    ("a", [1 -2; -2 1]),
+    ("b", [1 -2; -2 3]),
+    ("c", [1 -2 0; -2 1 2; 0 2 0]),
+]
+for (label, matrix) in matrices_to_diagonalize
+    decomposition = eigen(Symmetric(Float64.(matrix)))
+    diagonal = Diagonal(decomposition.values)
+    residual = norm(matrix * decomposition.vectors - decomposition.vectors * diagonal)
+    println("\n", label, ") A ="); display(matrix)
+    println("D ="); display(diagonal)
+    println("P (столбцы — собственные векторы) ="); display(decomposition.vectors)
+    println("Проверка A*P ≈ P*D, невязка = ", residual)
+end
+end
+
+function run_4_4_3_2()
+heading("4.4.3.2. Степень и корни матриц")
+power_source = [1 -2; -2 1]
+power_10 = power_source^10
+println("a) [1 -2; -2 1]^10 ="); display(power_10)
+
+square_source_1 = [5 -2; -2 5]
+square_root_1 = matrix_function_symmetric(square_source_1, sqrt)
+println("b) sqrt([5 -2; -2 5]) ="); display(square_root_1)
+println("Проверка R^2 ≈ A: ", square_root_1^2 ≈ square_source_1)
+
+cube_source = [1 -2; -2 1]
+cube_root = matrix_function_symmetric(cube_source, cbrt)
+println("c) cbrt([1 -2; -2 1]) ="); display(cube_root)
+println("Проверка R^3 ≈ A: ", cube_root^3 ≈ cube_source)
+
+square_source_2 = [1 2; 2 3]
+square_root_2 = matrix_function_symmetric(square_source_2, value -> sqrt(complex(value)))
+println("d) Главный комплексный sqrt([1 2; 2 3]) ="); display(square_root_2)
+println("Комплексный результат нужен из-за отрицательного собственного значения.")
+println("Проверка R^2 ≈ A: ", square_root_2^2 ≈ square_source_2)
+end
+
+function run_4_4_3_3()
+heading("4.4.3.3. Собственные значения и эффективность")
+large_A = [
+    140 97 74 168 131
+    97 106 89 131 36
+    74 89 152 144 71
+    168 131 144 54 142
+    131 36 71 142 36
+]
+large_eigenvalues = eigvals(Symmetric(large_A))
+eigenvalue_diagonal = Diagonal(large_eigenvalues)
+lower_triangular = LowerTriangular(large_A)
+println("Собственные значения A = ", large_eigenvalues)
+println("Диагональная матрица собственных значений ="); display(eigenvalue_diagonal)
+println("Нижнетреугольная часть A ="); display(lower_triangular)
+
+time_eigenvalues = @belapsed eigvals(Symmetric($large_A))
+time_diagonal = @belapsed Diagonal($large_eigenvalues)
+time_lower = @belapsed LowerTriangular($large_A)
+println("Время eigvals: ", time_eigenvalues, " с")
+println("Время создания Diagonal: ", time_diagonal, " с")
+println("Время создания LowerTriangular: ", time_lower, " с")
+end
+
+function print_inverse_productivity(label, matrix; direct=false)
+    productive, leontief_inverse = productivity_by_inverse(matrix)
+    println("\n", label, ") A ="); display(matrix)
+    println("(I-A)^(-1) ="); display(leontief_inverse)
+    println("Матрица ", productive ? "продуктивна" : "непродуктивна")
+    if direct && !productive
+        negative_position = findfirst(value -> value < -1e-12, leontief_inverse)
+        input_column = negative_position[2]
+        y = zeros(size(matrix, 1)); y[input_column] = 1
+        x = leontief_inverse * y
+        println("Контрпример по определению: y = ", y, ", x = ", x)
+    end
+end
+
+function run_4_4_4_1()
+heading("4.4.4.1. Проверка продуктивности по определению")
+definition_matrices = [
+    ("a", [1.0 2.0; 3.0 4.0]),
+    ("b", (1 / 2) .* [1.0 2.0; 3.0 4.0]),
+    ("c", (1 / 10) .* [1.0 2.0; 3.0 4.0]),
+]
+for (label, matrix) in definition_matrices
+    print_inverse_productivity(label, matrix; direct=true)
+end
+end
+
+function run_4_4_4_2()
+heading("4.4.4.2. Критерий неотрицательности (I-A)^(-1)")
+inverse_criterion_matrices = [
+    ("a", [1.0 2.0; 3.0 1.0]),
+    ("b", (1 / 2) .* [1.0 2.0; 3.0 1.0]),
+    ("c", (1 / 10) .* [1.0 2.0; 3.0 1.0]),
+]
+for (label, matrix) in inverse_criterion_matrices
+    print_inverse_productivity(label, matrix)
+end
+end
+
+function run_4_4_4_3()
+heading("4.4.4.3. Спектральный критерий")
+spectral_matrices = [
+    ("a", [1.0 2.0; 3.0 1.0]),
+    ("b", (1 / 2) .* [1.0 2.0; 3.0 1.0]),
+    ("c", (1 / 10) .* [1.0 2.0; 3.0 1.0]),
+    ("d", [0.1 0.2 0.3; 0.0 0.1 0.2; 0.0 0.1 0.3]),
+]
+for (label, matrix) in spectral_matrices
+    values = eigvals(matrix)
+    radius = maximum(abs.(values))
+    println("\n", label, ") λ = ", values)
+    println("Спектральный радиус ρ(A) = ", radius)
+    println("Матрица ", radius < 1 ? "продуктивна" : "непродуктивна")
+end
+end
+
+const TASKS = [
+    "4.2.1" => run_4_2_1,
+    "4.2.2" => run_4_2_2,
+    "4.2.3" => run_4_2_3,
+    "4.2.4" => run_4_2_4,
+    "4.2.5" => run_4_2_5,
+    "4.2.6" => run_4_2_6,
+    "4.4.1" => run_4_4_1,
+    "4.4.2.1" => run_4_4_2_1,
+    "4.4.2.2" => run_4_4_2_2,
+    "4.4.3.1" => run_4_4_3_1,
+    "4.4.3.2" => run_4_4_3_2,
+    "4.4.3.3" => run_4_4_3_3,
+    "4.4.4.1" => run_4_4_4_1,
+    "4.4.4.2" => run_4_4_4_2,
+    "4.4.4.3" => run_4_4_4_3,
+]
+
+requested_task = get(ENV, "LAB04_TASK", "all")
+if requested_task == "all"
+    for (_, run_task) in TASKS
+        run_task()
+    end
+    heading("Лабораторная работа № 4 выполнена полностью")
+else
+    task_index = findfirst(pair -> first(pair) == requested_task, TASKS)
+    isnothing(task_index) && error(
+        "Неизвестное задание '$requested_task'. Доступны: " *
+        join(first.(TASKS), ", "),
+    )
+    last(TASKS[task_index])()
+    heading("Задание $requested_task выполнено")
+end
