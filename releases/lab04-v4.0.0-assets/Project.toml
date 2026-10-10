@@ -1,0 +1,12 @@
+name = "project"
+authors = ["Ведьмина Александра Сергеевна"]
+
+[deps]
+BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+DrWatson = "634d3b9d-ee7a-5ddf-bec9-22491ea816e1"
+IJulia = "7073ff75-c697-5162-941a-fcdaad2a7d2a"
+Literate = "98b081ad-f1c9-55d3-8b20-4c87d4299306"
+
+[compat]
+DrWatson = "2.19.1"
+julia = "1.12.5"
